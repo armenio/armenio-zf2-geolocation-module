@@ -1,0 +1,27 @@
+{
+	"name": "armenio/armenio-geolocation",
+	"description": "GeoLocation library",
+	"type": "library",
+	"keywords": [
+		"geolocation",
+		"helper",
+		"zf2",
+		"armenio"
+	],
+	"homepage": "https://github.com/armenio/armenio-geolocation",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Rafael Armênio",
+			"email": "rafael.armenio@gmail.com"
+		}
+	],
+	"require": {
+		"zendframework/zendframework": "2.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Aircode\\GeoLocation\\": "src/"
+		}
+	},
+}
