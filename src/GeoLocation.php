@@ -15,8 +15,8 @@ class GeoLocation
 		$latLng = array();
 
 		try{
-			$uri = sprintf('http://maps.google.com/maps/api/geocode/json?address=%s&sensor=false', $address);
-			$client = new Client($uri);
+			$url = sprintf('http://maps.google.com/maps/api/geocode/json?address=%s&sensor=false', $address);
+			$client = new Client($url);
 			$client->setAdapter(new Curl());
 			$client->setMethod('GET');
 			$client->setOptions(array(
