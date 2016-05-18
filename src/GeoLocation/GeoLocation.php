@@ -1,5 +1,14 @@
 <?php
+/**
+ * Rafael Armenio <rafael.armenio@gmail.com>
+ *
+ * @link http://github.com/armenio for the source repository
+ */
+ 
 namespace Armenio\GeoLocation;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
@@ -8,9 +17,26 @@ use Zend\Json\Json;
 /**
  * GeoLocation
  */
-class GeoLocation
+class GeoLocation implements ServiceLocatorAwareInterface
 {
-	public static function getCoordinates( $address )
+    protected $serviceLocator;
+
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    public function getCoordinates($address)
+	{
+		return self::getCoordinates($address);
+	}
+
+	public static function getCoordinates($address)
 	{
 		$latLng = array();
 
@@ -22,7 +48,7 @@ class GeoLocation
 			$client->setOptions(array(
 				'curloptions' => array(
 					CURLOPT_HEADER => false,
-				)
+				),
 			));
 
 			
@@ -34,7 +60,7 @@ class GeoLocation
 
 			$latLng = array(
 				'lat' => $result['results'][0]['geometry']['location']['lat'],
-				'lng' => $result['results'][0]['geometry']['location']['lng']
+				'lng' => $result['results'][0]['geometry']['location']['lng'],
 			);
 
 			$isException = false;
