@@ -1,5 +1,5 @@
 {
-	"name": "armenio/armenio-geolocation",
+	"name": "armenio/armenio-zf2-geolocation-module",
 	"description": "GeoLocation library",
 	"type": "library",
 	"keywords": [
@@ -8,7 +8,7 @@
 		"zf2",
 		"armenio"
 	],
-	"homepage": "https://github.com/armenio/armenio-geolocation",
+	"homepage": "https://github.com/armenio/armenio-zf2-geolocation-module",
 	"license": "MIT",
 	"authors": [
 		{
