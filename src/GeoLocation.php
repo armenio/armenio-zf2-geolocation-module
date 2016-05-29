@@ -31,12 +31,7 @@ class GeoLocation implements ServiceLocatorAwareInterface
         return $this->serviceLocator;
     }
 
-    public function getCoordinates($address)
-	{
-		return self::getCoordinates($address);
-	}
-
-	public static function getCoordinates($address)
+	public function getCoordinates($address)
 	{
 		$latLng = array();
 
