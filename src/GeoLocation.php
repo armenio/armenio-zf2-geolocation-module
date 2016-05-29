@@ -7,31 +7,16 @@
  
 namespace Armenio\GeoLocation;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
-use Zend\Json\Json;
+use Zend\Json;
 
 /**
  * GeoLocation
  */
-class GeoLocation implements ServiceLocatorAwareInterface
+class GeoLocation
 {
-    protected $serviceLocator;
-
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-	public function getCoordinates($address)
+	public static function getLatLng($address)
 	{
 		$latLng = array();
 
@@ -51,7 +36,7 @@ class GeoLocation implements ServiceLocatorAwareInterface
 			
 			$body = $response->getBody();
 			
-			$result = Json::decode($body, 1);
+			$result = Json\Json::decode($body, 1);
 
 			$latLng = array(
 				'lat' => $result['results'][0]['geometry']['location']['lat'],
@@ -63,13 +48,13 @@ class GeoLocation implements ServiceLocatorAwareInterface
 			$isException = true;
 		} catch (\Zend\Http\Client\Adapter\Exception\RuntimeException $e){
 			$isException = true;
-		} catch (\Zend\Json\Exception\RuntimeException $e) {
+		} catch (Json\Exception\RuntimeException $e) {
 			$isException = true;
-		} catch (\Zend\Json\Exception\RecursionException $e2) {
+		} catch (Json\Exception\RecursionException $e2) {
 			$isException = true;
-		} catch (\Zend\Json\Exception\InvalidArgumentException $e3) {
+		} catch (Json\Exception\InvalidArgumentException $e3) {
 			$isException = true;
-		} catch (\Zend\Json\Exception\BadMethodCallException $e4) {
+		} catch (Json\Exception\BadMethodCallException $e4) {
 			$isException = true;
 		}
 
