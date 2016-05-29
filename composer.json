@@ -1,6 +1,6 @@
 {
 	"name": "armenio/armenio-zf2-geolocation-module",
-	"description": "GeoLocation library",
+	"description": "GeoLocation Module for Zend Framework 2",
 	"type": "library",
 	"keywords": [
 		"geolocation",
