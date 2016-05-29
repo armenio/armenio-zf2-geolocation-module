@@ -20,11 +20,8 @@
 		"zendframework/zendframework": "2.*"
 	},
 	"autoload": {
-		"psr-0": {
-			"Armenio\\GeoLocation\\": "src"
-		},
-		"classmap": [
-			"Module.php"
-		]
+		"psr-4": {
+			"Armenio\\GeoLocation\\": "src/"
+		}
 	}
 }
