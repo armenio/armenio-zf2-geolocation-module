@@ -18,18 +18,18 @@ class GeoLocation
 {
 	public static function getLatLng($address)
 	{
-		$latLng = array();
+		$latLng = [];
 
 		try{
 			$url = sprintf('http://maps.google.com/maps/api/geocode/json?address=%s&sensor=false', $address);
 			$client = new Client($url);
 			$client->setAdapter(new Curl());
 			$client->setMethod('GET');
-			$client->setOptions(array(
-				'curloptions' => array(
+			$client->setOptions([
+				'curloptions' => [
 					CURLOPT_HEADER => false,
-				),
-			));
+				],
+			]);
 
 			
 			$response = $client->send();
@@ -38,10 +38,10 @@ class GeoLocation
 			
 			$result = Json\Json::decode($body, 1);
 
-			$latLng = array(
+			$latLng = [
 				'lat' => $result['results'][0]['geometry']['location']['lat'],
 				'lng' => $result['results'][0]['geometry']['location']['lng'],
-			);
+			];
 
 			$isException = false;
 		} catch (\Zend\Http\Exception\RuntimeException $e){
