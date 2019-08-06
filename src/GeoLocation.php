@@ -24,7 +24,7 @@ class GeoLocation
      */
     public static function getLatLng($address, $key)
     {
-        $url = 'http://maps.google.com/maps/api/geocode/json';
+        $url = 'https://maps.google.com/maps/api/geocode/json';
         $client = new Client($url);
         $client->setAdapter(new Curl());
         $client->setMethod('GET');
