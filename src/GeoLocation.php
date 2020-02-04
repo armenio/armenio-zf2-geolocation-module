@@ -2,7 +2,7 @@
 /**
  * Rafael Armenio <rafael.armenio@gmail.com>
  *
- * @link http://github.com/armenio for the source repository
+ * @link http://github.com/armenio
  */
 
 namespace Armenio\GeoLocation;
@@ -25,6 +25,7 @@ class GeoLocation
     public static function getLatLng($address, $key)
     {
         $url = 'https://maps.google.com/maps/api/geocode/json';
+
         $client = new Client($url);
         $client->setAdapter(new Curl());
         $client->setMethod('GET');
