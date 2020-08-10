@@ -20,7 +20,7 @@ class GeoLocation
     /**
      * @param string $address
      * @param string $key
-     * @return array
+     * @return array|string[]
      */
     public static function getLatLng($address, $key)
     {
@@ -50,7 +50,7 @@ class GeoLocation
 
             $arrResults = Json\Json::decode($body, 1);
 
-            if (!empty($arrResults)) {
+            if (!empty($arrResults) && !empty($arrResults['results']) && !empty($arrResults['results'][0])) {
                 $result = [
                     'lat' => $arrResults['results'][0]['geometry']['location']['lat'],
                     'lng' => $arrResults['results'][0]['geometry']['location']['lng'],
@@ -61,27 +61,7 @@ class GeoLocation
                 ];
             }
 
-        } catch (Client\Adapter\Exception\TimeoutException $e) {
-            $result = [
-                'error' => $e->getMessage(),
-            ];
-        } catch (Client\Adapter\Exception\RuntimeException $e) {
-            $result = [
-                'error' => $e->getMessage(),
-            ];
-        } catch (Json\Exception\RecursionException $e) {
-            $result = [
-                'error' => $e->getMessage(),
-            ];
-        } catch (Json\Exception\RuntimeException $e) {
-            $result = [
-                'error' => $e->getMessage(),
-            ];
-        } catch (Json\Exception\InvalidArgumentException $e) {
-            $result = [
-                'error' => $e->getMessage(),
-            ];
-        } catch (Json\Exception\BadMethodCallException $e) {
+        } catch (\Exception $e) {
             $result = [
                 'error' => $e->getMessage(),
             ];
