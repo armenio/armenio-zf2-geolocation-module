@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Rafael Armenio <rafael.armenio@gmail.com>
  *
@@ -13,6 +14,7 @@ use Zend\Json;
 
 /**
  * Class GeoLocation
+ *
  * @package Armenio\GeoLocation
  */
 class GeoLocation
@@ -20,6 +22,7 @@ class GeoLocation
     /**
      * @param string $address
      * @param string $key
+     *
      * @return array|string[]
      */
     public static function getLatLng($address, $key)
@@ -29,19 +32,23 @@ class GeoLocation
         $client = new Client($url);
         $client->setAdapter(new Curl());
         $client->setMethod('GET');
-        $client->setOptions([
-            'curloptions' => [
-                CURLOPT_HEADER => false,
-                CURLOPT_CONNECTTIMEOUT => 0,
-                CURLOPT_TIMEOUT => 60,
-            ],
-        ]);
+        $client->setOptions(
+            [
+                'curloptions' => [
+                    CURLOPT_HEADER => false,
+                    CURLOPT_CONNECTTIMEOUT => 0,
+                    CURLOPT_TIMEOUT => 60,
+                ],
+            ]
+        );
 
-        $client->setParameterGet([
-            'address' => $address,
-            'sensor' => false,
-            'key' => $key,
-        ]);
+        $client->setParameterGet(
+            [
+                'address' => $address,
+                'sensor' => false,
+                'key' => $key,
+            ]
+        );
 
         try {
             $response = $client->send();
@@ -50,7 +57,7 @@ class GeoLocation
 
             $arrResults = Json\Json::decode($body, 1);
 
-            if (!empty($arrResults) && !empty($arrResults['results']) && !empty($arrResults['results'][0])) {
+            if (! empty($arrResults) && ! empty($arrResults['results']) && ! empty($arrResults['results'][0])) {
                 $result = [
                     'lat' => $arrResults['results'][0]['geometry']['location']['lat'],
                     'lng' => $arrResults['results'][0]['geometry']['location']['lng'],
@@ -60,7 +67,6 @@ class GeoLocation
                     'error' => 'Dados não encontrados.',
                 ];
             }
-
         } catch (\Exception $e) {
             $result = [
                 'error' => $e->getMessage(),
